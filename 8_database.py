@@ -1,5 +1,5 @@
- ## Primary Keys 
-
+## Primary Keys 
+#################################################################################
 import sqlite3
 
 conn = sqlite3.connect('customer.db') # store db in memory
@@ -9,6 +9,12 @@ c = conn.cursor()#cursor() instance
 
 ## QUERY THE DATABASE
 c.execute("SELECT * FROM customers")
+
+
+## print row-ids in front of the table
+c.execute("SELECT rowid, * FROM customers")#select rowid and everything from customers
+
+
 #print(c.fetchone())
 #c.fetchmany(3)
 #c.fetchall()
@@ -16,12 +22,9 @@ c.execute("SELECT * FROM customers")
 
 items = c.fetchall()
 
-## create a loop to print all items
-print("Name" + "\t\t\t" + "Email")
-print("----------        ---------")
+## print items
 for item in items:
-	print(item[0] + "\t" + item[1] + "\t" + item[2])
-
+	print(item)
 
 print('\nCommand executed successfully...')
 ## commit the changes to db

@@ -1,34 +1,41 @@
 import sqlite3
 
+## Query the database and return all records
+def show_all():
+	## CONNECT TO DATABASE
+	conn = sqlite3.connect('customer.db')
 
-#create connection
-#conn = sqlite3.connect(':memory:') # store db in memory
+	## CREATE A CURSOR
+	c = conn.cursor()
 
-##
+	## Query database
+	c.execute("SELECT rowid, * FROM customers")
+	items = c.fetchall()
 
-conn = sqlite3.connect('customer.db') # store db in memory
+	## print all items
+	for item in items:
+		print(item)
 
-# create a cursor
-c = conn.cursor()#cursor() instance
+	## commit the changes to db
+	conn.commit()
 
-## insert a record into the table
-c.execute("INSERT INTO customers VALUES ('John','Elder','john123@domain.com')")
-#create a table
-c.execute("""CREATE TABLE customers(
-	first_name text,
-	last_name text,
-	email text
-	)""")
+	## close our connection
+	conn.close()
 
-## data types in sqlite3
-# NULL
-# INTEGER
-# REAL
-# TEXT
-# BLOB
+## function that adds one record to the table
+def add_one(first, last, email):
+	## CONNECT TO DATABASE
+	conn = sqlite3.connect('customer.db')
 
-## commit the changes to db
-conn.commit()
+	## CREATE A CURSOR
+	c = conn.cursor()
 
-## close our connection
-conn.close()
+	## Query database
+	c.execute("INSERT INTO customers VALUES (?,?,?)",(first, last, email)) 
+
+	## commit the changes to db
+	conn.commit()
+
+	## close our connection
+	conn.close()
+

@@ -12,7 +12,7 @@ conn = sqlite3.connect('customer.db') # store db in memory
 c = conn.cursor()#cursor() instance
 
 ## insert a record into the table
-c.execute("INSERT INTO customers VALUES ('John','Elder','john123@domain.com')")
+#c.execute("INSERT INTO customers VALUES ('John','Elder','john123@domain.com')")
 #create a table
 c.execute("""CREATE TABLE customers(
 	first_name text,
