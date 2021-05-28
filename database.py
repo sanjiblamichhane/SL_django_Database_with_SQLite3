@@ -58,3 +58,19 @@ def delete_one(id):
 	## commit our command and close
 	conn.commit()
 	conn.close()
+
+
+## Lookup where --> position
+def email_lookup(email):
+	conn = sqlite3.connect('customer.db')
+	c = conn.cursor()
+	c.execute("SELECT * from customers WHERE email = (?)", (email,)) ## changed by SL
+	items = c.fetchall()	## fetch all items
+	
+	for item in items:
+		print(item)
+
+	## commit our command and close
+	conn.commit()
+	conn.close()
+	
